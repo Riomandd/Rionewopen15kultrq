@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIOCHEATS ULTRA - Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            background: radial-gradient(circle, #080808, #111111);
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-transform: uppercase;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* General Background Box */
+        .background-box {
+            background: linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(0, 0, 0, 0.5));
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(10px); /* Adds a blur effect to background */
+        }
+
+        .glow-cyan { color: #00ffff; }
+        .glow-yellow { color: #ffcc00; }
+
+        /* Login Form */
+        .login-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            background: #222;
+            color: white;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .login-box button {
+            padding: 12px;
+            background: linear-gradient(90deg, #00ffff, #0077ff);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 10px #00ffff;
+            margin-top: 10px;
+        }
+
+        /* Hide elements */
+        .hidden { display: none; }
+
+        /* Main Content Box */
+        .box {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .history-box {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+        }
+
+        .history-entry {
+            margin: 5px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+
+        .big-entry { color: #ffcc00; }
+        .small-entry { color: #00ff00; }
+
+        /* Prediction Styles */
+        .prediction-text {
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0px 0px 15px #00ffff, 0px 0px 30px #00ffff;
+        }
+
+        .loading { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="background-box">
+        <div class="logo glow-cyan">
+            RIOCHEATS <span class="glow-yellow">ULTRA</span>
+        </div>
+        <h2>🔒 LOGIN</h2>
+        <div class="login-box">
+            <input type="text" id="username" placeholder="Enter Username">
+            <input type="password" id="password" placeholder="Enter Password">
+            <button onclick="login()">LOGIN</button>
+            <p id="errorMessage" style="color: red; display: none;">Invalid Credentials</p>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden until login) -->
+    <div id="mainContent" class="background-box hidden">
+        <div class="logo glow-cyan">
+            RIOCHEATS <span class="glow-yellow">ULTRA</span>
+        </div>
+
+        <div class="box">
+            <div class="title">🚀 CURRENT PREDICTION</div>
+            <p class="glow-yellow">🎮 <strong>GAME TYPE:</strong> WINGO 1 MIN</p>
+            <p>⭐ <strong>PREDICTION:</strong> 
+                <span id="prediction" class="prediction-text glow-yellow">LOADING...</span> 
+                <span id="loadingIndicator" class="loading">...</span>
+            </p>
+            <p class="timer">⏳ NEXT UPDATE IN: <span id="countdown">60</span> SECONDS</p>
+        </div>
+
+        <div class="history-box">
+            <div class="title glow-cyan">🔄 PREDICTION HISTORY</div>
+            <div id="history"></div>
+        </div>
+
+        <button onclick="logout()" style="margin-top: 15px; padding: 10px; background: red; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            LOGOUT
+        </button>
+    </div>
+
+    <script>
+        let history = [];
+
+        // Set the correct username and password
+        const validUsername = "RIOCHEATS";
+        const validPassword = "ULTRA";
+
+        function login() {
+            let enteredUsername = document.getElementById("username").value;
+            let enteredPassword = document.getElementById("password").value;
+
+            if (enteredUsername === validUsername && enteredPassword === validPassword) {
+                localStorage.setItem("loggedIn", "true");
+                showMainPage();
+            } else {
+                document.getElementById("errorMessage").style.display = "block";
+            }
+        }
+
+        function showMainPage() {
+            document.getElementById("loginScreen").classList.add("hidden");
+            document.getElementById("mainContent").classList.remove("hidden");
+            updatePrediction(); // Start prediction updates
+        }
+
+        function checkLoginStatus() {
+            if (localStorage.getItem("loggedIn") === "true") {
+                showMainPage();
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            location.reload();
+        }
+
+        async function fetchGameResult() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    let result = Math.floor(Math.random() * 10);
+                    resolve({ result });
+                }, 1500);
+            });
+        }
+
+        async function updatePrediction() {
+            document.getElementById("prediction").innerText = "LOADING...";
+            document.getElementById("loadingIndicator").style.display = "inline-block";
+
+            let apiResult = await fetchGameResult();
+
+            if (apiResult) {
+                let predictionType = apiResult.result >= 5 ? "BIG" : "SMALL";
+                let predictionClass = predictionType === "BIG" ? "big" : "small";
+
+                document.getElementById("prediction").innerText = predictionType;
+                document.getElementById("prediction").className = "prediction-text " + predictionClass;
+                document.getElementById("loadingIndicator").style.display = "none";
+
+                let historyEntryClass = predictionType === "BIG" ? "big-entry" : "small-entry";
+
+                history.unshift({ prediction: predictionType, class: historyEntryClass });
+
+                document.getElementById("history").innerHTML = history.slice(0, 5).map(h => `
+                    <div class="history-entry ${h.class}">${h.prediction}</div>
+                `).join("");
+            }
+        }
+
+        function updateCountdown() {
+            let now = new Date();
+            let secondsLeft = 60 - now.getSeconds();
+            document.getElementById("countdown").innerText = secondsLeft;
+
+            if (secondsLeft === 60) {
+                updatePrediction();
+            }
+        }
+
+        checkLoginStatus(); // Check login status on page load
+
+        setInterval(updateCountdown, 1000);
+    </script>
+
+</body>
+</html>
