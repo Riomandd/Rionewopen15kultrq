@@ -1,130 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIOCHEATS V1 - Login</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RIOCHEATS PREMIUM 1Min</title>
+  <script src="js/chart.js"></script>
+  <style>
+  /* Refresh Button Styling */
+    #refreshButton {
+      position: fixed; /* Fixes the button at the top-right */
+      top: 10px;
+      right: 10px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      background-color: #ff0000; /* Red background */
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+      z-index: 1000; /* Ensures it stays above other elements */
+    }
+    /* Stylish Box for "RIOCHEATS V1" */
+    .unique-box {
+      background: linear-gradient(45deg, #ECA80A, #ffcc00); /* Unique Gradient */
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 4px 4px 10px rgba(255, 200, 0, 0.7); /* Golden glow */
+      margin: 20px auto;
+      width: 80%;
+      font-size: 22px;
+      font-weight: bold;
+      color: black;
+      border: 3px solid #ECA80A; /* Golden border */
+      text-transform: uppercase;
+    }
+    /* Background Box for Result Area */
+    .result-box {
+      background-color: #222; /* Dark background */
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+      margin: 20px auto;
+      width: 80%;
+      border: 2px solid #ECA80A; /* Golden border */
+    }
+    #refreshButton:hover {
+      background-color: #cc0000;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #808080;
+      margin: 0;
+      padding: 0;
+      color: #4169E1;
+    }
+    @keyframes moveBackground {
+  0% { background-color: #FFD700; } /* Gold */
+  25% { background-color: #FF4500; } /* Orange-Red */
+  50% { background-color: #50C878; } /* Emerald Green */
+  75% { background-color: #4169E1; } /* Royal Blue */
+  100% { background-color: #FFD700; } /* Back to Gold */
+}
 
-        body {
-            background: radial-gradient(circle, #080808, #111111);
-            color: #ffffff;
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-transform: uppercase;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* General Background Box */
-        .background-box {
-            background: linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(0, 0, 0, 0.5));
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-            max-width: 400px;
-            width: 100%;
-            backdrop-filter: blur(10px); /* Adds a blur effect to background */
-        }
-
-        .glow-cyan { color: #00ffff; }
-        .glow-yellow { color: #ffcc00; }
-
-        /* Login Form */
-        .login-box {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-box input {
-            width: 90%;
-            padding: 10px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 8px;
-            background: #222;
-            color: white;
-            font-size: 16px;
-            text-align: center;
-        }
-
-        .login-box button {
-            padding: 12px;
-            background: linear-gradient(90deg, #00ffff, #0077ff);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 10px #00ffff;
-            margin-top: 10px;
-        }
-
-        /* Hide elements */
-        .hidden { display: none; }
-
-        /* Main Content Box */
-        .box {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-        }
-
-        .history-box {
-            margin-top: 30px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-        }
-
-        .history-entry {
-            margin: 5px;
-            padding: 5px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 5px;
-        }
-
-        .big-entry { color: #ffcc00; }
-        .small-entry { color: #00ff00; }
-
-        /* Prediction Styles */
-        .prediction-text {
-            font-size: 24px;
-            font-weight: bold;
-            text-shadow: 0px 0px 15px #00ffff, 0px 0px 30px #00ffff;
-        }
-
-        .loading { display: none; }
-    </style>
+body {
+  animation: moveBackground 10s infinite alternate; /* 10 seconds loop */
+  color: #4169E1; /* Black text for contrast */
+}
+    h1, h2 {
+      color: #FFD700;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .card {
+      max-width: 90%;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #8B7500;
+      box-shadow: 3 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #dataTable, #predictionHistoryTable {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #ECA80A;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #0AD1F9;
+    }
+    th {
+      background-color: #C0C0C0;
+      color: black;
+      font-weight: bold;
+    }
+    td {
+      background-color: #000000;
+    }
+    tr:nth-child(even) td {
+      background-color: #808080;
+    }
+    tr:hover td {
+      background-color: #000000;
+    }
+    #predictionChart {
+      width: 100%;
+      height: 250px; /* Fixed height */
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      background-color: #000000;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .pagination button {
+      padding: 10px 20px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #FFFF33;
+      color: black;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .pagination button:hover {
+      background-color: #FF0000;
+      transform: scale(1.05);
+    }
+    .pagination button:disabled {
+      background-color: #33FFFF;
+      cursor: not-allowed;
+    }
+    #timeRemaining {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+    }
+    #predictedNumber, #predictedPremium {
+      font-size: 18px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .button-group {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .button-group a {
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+      display: inline-block;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    #registerButton {
+      background-color: #007bff;
+    }
+    #telegramButton {
+      background-color: #dc3545;
+    }
+    .button-group a:hover {
+      transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+      .card {
+        padding: 15px;
+      }
+      th, td {
+        padding: 8px;
+        font-size: 14px;
+      }
+      #timeRemaining {
+        font-size: 20px;
+      }
+      #predictedNumber, #predictedPremium {
+        font-size: 16px;
+      }
+      #predictionChart {
+        height: 200px;
+      }
+    }
+    @media (max-width: 480px) {
+      th, td {
+        font-size: 18px;
+      }
+      #timeRemaining {
+        font-size: 18px;
+      }
+      #predictedNumber, #predictedPremium {
+        font-size: 18px;
+      }
+      #predictionChart {
+        height: 180px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Login Screen -->
-    <div id="loginScreen" class="background-box">
-        <div class="logo glow-cyan">
-            RIOCHEATS <span class="glow-yellow">V1</span>
-        </div>
-        <h2>🔒 LOGIN</h2>
-        <div class="login-box">
-            <input type="text" id="username" placeholder="Enter Username">
-            <input type="password" id="password" placeholder="Enter Password">
-            <button onclick="login()">LOGIN</button>
-            <p id="errorMessage" style="color: red; display: none;">Invalid Credentials</p>
-        </div>
+<!-- Refresh Button -->
+  <button id="refreshButton" onclick="refreshPage()"> Refresh</button>
+  <!-- Unique Stylish Box for RIOCHEATS V1 -->
+<div class="unique-box">RIOCHEATS V1</div>
+
+  <h1></h1>
+  <div class="card">
+    <h2>RIOCHEATS V1</h2>
+    <!-- Result Box with Background -->
+  <div class="result-box">
+    <p id="predictedNumber">RESULT 👉🏻 LOADING...</p>
+    <p id="predictedPremium">: LOADING...</p>
+  </div>
+      <h2>NEXT UPDATE TIME</h2>
+      <p id="timeRemaining">LOADING...</p>
     </div>
-
- THE SERVER IS CURRENTLY SERVER UNDER MAINTENANCE DON'T TRY TO PLAY ▶️ 
- YOU CAN WAIT 72 HOURS SYSTEM AUTOMATICALLY UPDATED SERVER IS SOON POSSIBLE 
-
+   <div class="card" style="display: none;">
+  <h2>GAME HISTORY</h2>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>PERIOD NUMBER</th>
+        <th>NUMBER</th>
+        <th>COLOUR</th>
+        <th>PREMIUM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data rows will be inserted here -->
+    </tbody>
+  </table>
+</div>
+    <!-- Hack history section hidden -->
+    <div class="card" style="display: none;">
+      <h2>HACK HISTORY</h2>
+      <table id="predictionHistoryTable">
+        <thead>
+          <tr>
+            <th>PERIOD NUMBER</th>
+            <th>HACK NUMBER</th>
+            <th>RESULT NUMBER</th>
+            <th>RESULT</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="pagination">
+        <button id="prevPage" disabled>Previous</button>
+        <button id="nextPage" disabled>Next</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>HELLO V1 USER THE RIOCHEATS V1 SERVER IS UPDATED IMPROVED PETTEN COLCULAT SYSTEM SYSTEM SHOWING RESULTS AUTOMATICALLY ENJOY DM KEY @riocheats007</h2>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tableBody = document.querySelector('#dataTable tbody');
+        const predictedNumberElement = document.getElementById('predictedNumber');
+        const predictedPremiumElement = document.getElementById('predictedPremium');
+        const timerElement = document.getElementById('timeRemaining');
+        const historyTableBody = document.querySelector('#predictionHistoryTable tbody');
+        const prevPageButton = document.getElementById('prevPage');
+        const nextPageButton = document.getElementById('nextPage');
+        let predictionHistory = JSON.parse(localStorage.getItem('predictionHistory')) || [];
+        let lastPrediction = JSON.parse(localStorage.getItem('lastPrediction'));
+        let currentPrediction = JSON.parse(localStorage.getItem('currentPrediction'));
+        let currentPage = 0;
+        const itemsPerPage = 10;
+        let timerInterval;
+      
+        const fetchNoAverageEmerdList = () => {
+          const requestData = {
+            pageSize: 10,
+            pageNo: 1,
+            typeId: 1,
+            language: 0,
+            random: "ded40537a2ce416e96c00e5218f6859a",
+            signature: "69306982EEEB19FA940D72EC93C62552",
+            timestamp: Math.floor(Date.now() / 1000)
+          };
+      
+          return fetch('https://api.bdg88zf.com/api/webapi/GetNoaverageEmerdList', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              'Accept': 'application/json, text/plain, */*'
+            },
+            body: JSON.stringify(requestData)
+          })
+          .then(response => response.json())
+          .catch(error => console.error('Error fetching no average EMERD list data:', error));
+        };
+      
+        const fetchGameIssue = () => {
+          const requestData = {
+            typeId: 1,
+            language: 0,
+            random: "f8dcb5c527814db68800e3946a2b60e8",
+            signature: "08CF7FF3339ED58D4743F4B650FCBEA9",
+            timestamp: Math.floor(Date.now() / 1000)
+          };
+      
+          return fetch('https://api.bdg88zf.com/api/webapi/GetGameIssue', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              'Accept': 'application/json, text/plain, */*'
+            },
+            body: JSON.stringify(requestData)
+          })
+          .then(response => response.json())
+          .catch(error => console.error('Error fetching game issue:', error));
+        };
+      
+        const categorizeNumber = (number) => {
+          if (number >= 0 && number <= 4) return 'SMALL';
+          if (number >= 5 && number <= 9) return 'BIG';
+          return 'Unknown';
+        };
+      
+        const generateRandomPrediction = () => {
+          const randomNumber = Math.floor(Math.random() * 10);
+          const randomCategory = categorizeNumber(randomNumber);
+          return { number: randomNumber, category: randomCategory };
+        };
+      
+        const updateDataAndPrediction = () => {
+          fetchNoAverageEmerdList()
+            .then(data => {
+              const list = data.data.list;
+              tableBody.innerHTML = '';
+              list.forEach(item => {
+                const numberCategory = categorizeNumber(Number(item.number));
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                  <td>${item.issueNumber}</td>
+                  <td>${item.number} (${numberCategory})</td>
+                  <td>${item.colour}</td>
+                  <td>${item.premium}</td>
+                `;
+                tableBody.appendChild(row);
+              });
+      
+              const latestIssue = list[0].issueNumber;
+              const latestActual = Number(list[0].number);
+              const actualCategory = categorizeNumber(latestActual);
+      
+              if (!lastPrediction || lastPrediction.issueNumber !== latestIssue) {
+                if (lastPrediction) {
+                  const result = (lastPrediction.category === actualCategory) ? 'WIN' : 'LOSS';
+                  predictionHistory.unshift({
+                    issueNumber: latestIssue,
+                    predictedNumber: lastPrediction.number,
+                    actualNumber: latestActual,
+                    result: result
+                  });
+                  localStorage.setItem('predictionHistory', JSON.stringify(predictionHistory));
+                }
+      
+                currentPrediction = generateRandomPrediction();
+                currentPrediction.issueNumber = latestIssue;
+                localStorage.setItem('currentPrediction', JSON.stringify(currentPrediction));
+              }
+      
+              predictedNumberElement.textContent = `RESULT 👉🏻 ${currentPrediction.category}`;
+              predictedPremiumElement.textContent = ``;
+      
+              lastPrediction = {
+                issueNumber: latestIssue,
+                number: currentPrediction.number,
+                category: currentPrediction.category
+              };
+              localStorage.setItem('lastPrediction', JSON.stringify(lastPrediction));
+      
+              updatePredictionHistoryTable();
+            })
+            .catch(error => console.error('Error updating data and prediction:', error));
+        };
+      
+        const updatePredictionHistoryTable = () => {
+          historyTableBody.innerHTML = '';
+      
+          const start = currentPage * itemsPerPage;
+          const end = start + itemsPerPage;
+          const paginatedHistory = predictionHistory.slice(start, end);
+      
+          paginatedHistory.forEach(entry => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${entry.issueNumber}</td>
+              <td>${entry.predictedNumber}</td>
+              <td>${entry.actualNumber}</td>
+              <td>${entry.result}</td>
+            `;
+            historyTableBody.appendChild(row);
+          });
+      
+          prevPageButton.disabled = currentPage === 0;
+          nextPageButton.disabled = end >= predictionHistory.length;
+        };
+      
+        const updateTimer = () => {
+          fetchGameIssue()
+            .then(data => {
+              const { endTime } = data.data;
+              const endDate = new Date(endTime);
+              const now = new Date();
+              const remainingTimeMs = endDate - now;
+      
+              if (remainingTimeMs <= 0) {
+                timerElement.textContent = "Time Remaining: 00:00:00";
+                clearInterval(timerInterval);
+                updateDataAndPrediction();
+                updateTimer();
+              } else {
+                const hours = String(Math.floor(remainingTimeMs / (1000 * 60 * 60))).padStart(2, '0');
+                const minutes = String(Math.floor((remainingTimeMs % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                const seconds = String(Math.floor((remainingTimeMs % (1000 * 60)) / 1000)).padStart(2, '0');
+                timerElement.textContent = `TIME IS RUNNING : ${hours}:${minutes}:${seconds}`;
+              }
+            })
+            .catch(error => console.error('Error fetching game issue for timer:', error));
+        };
+      
+        // Pagination controls
+        prevPageButton.addEventListener('click', () => {
+          if (currentPage > 0) {
+            currentPage--;
+            updatePredictionHistoryTable();
+          }
+        });
+      
+        nextPageButton.addEventListener('click', () => {
+          if ((currentPage + 1) * itemsPerPage < predictionHistory.length) {
+            currentPage++;
+            updatePredictionHistoryTable();
+          }
+        });
+      
+        // Initialize data and start the timer
+        updateDataAndPrediction();
+        updateTimer();
+        timerInterval = setInterval(() => {
+          updateTimer();
+          updateDataAndPrediction();
+        }, 1000);
+      
+        // Load initial prediction history table
+        updatePredictionHistoryTable();
+      });
+      
+      <!-- JavaScript for Refresh Button -->
+      function refreshPage() {
+        location.reload(); // Reloads the entire page
+      }
+    </script>
+  </div>
 </body>
 </html>
