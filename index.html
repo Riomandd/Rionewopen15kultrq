@@ -1,161 +1,187 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIOCHEATS V1</title> <!-- Changed title here -->
-    <style>
-        /* Universal Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RIOCHEATS V1</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            color: #fff;
-        }
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+    }
 
-        .login-container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 40px 60px;
-            border-radius: 15px;
-            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            max-width: 380px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            animation: fadeIn 1.2s ease-in-out;
-        }
+    .login-container {
+      background: linear-gradient(145deg, #3e2d00, #1c1300);
+      border: 2px solid #c9b037;
+      padding: 40px 60px;
+      border-radius: 15px;
+      box-shadow:
+        0 0 20px rgba(201, 176, 55, 0.5),
+        inset 0 0 15px rgba(255, 215, 0, 0.2);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+      animation: fadeIn 1.2s ease-in-out;
+    }
 
-        h2 {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+      color: #FFD700;
+      background: linear-gradient(to right, #fff8dc, #ffd700, #b8860b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        p {
-            font-size: 16px;
-            margin-bottom: 25px;
-            color: #ccc;
-        }
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #f0e6c4;
+    }
 
-        strong {
-            font-size: 18px;
-            color: #F39C12;
-            font-weight: 600;
-        }
+    strong {
+      font-size: 20px;
+      color: #ffe58a;
+      font-weight: bold;
+    }
 
-        .input-group {
-            margin-bottom: 20px;
-        }
+    .input-group {
+      margin-bottom: 20px;
+    }
 
-        .input-group label {
-            font-size: 14px;
-            color: #ddd;
-            margin-bottom: 8px;
-            text-align: left;
-            display: block;
-        }
+    .input-group label {
+      font-size: 14px;
+      color: #e1c97a;
+      margin-bottom: 8px;
+      text-align: left;
+      display: block;
+    }
 
-        .input-group input {
-            width: 100%;
-            padding: 15px;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            outline: none;
-            background-color: #333;
-            color: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
+    .input-group input {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      background: #2c1f00;
+      color: #fffbd1;
+      box-shadow: inset 0 0 8px rgba(255, 223, 0, 0.2);
+      transition: all 0.3s ease;
+    }
 
-        .input-group input:focus {
-            background-color: #444;
-            border-color: #F39C12;
-            box-shadow: 0 0 8px rgba(243, 156, 18, 0.7);
-        }
+    .input-group input:focus {
+      background-color: #3a2a00;
+      box-shadow: 0 0 8px rgba(255, 223, 0, 0.6);
+    }
 
-        button {
-            width: 100%;
-            padding: 15px;
-            background-color: #F39C12;
-            color: #fff;
-            font-size: 18px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+    button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(to right, #bfa443, #f7ce68, #bfa443);
+      color: #1a0f00;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    }
 
-        button:hover {
-            background-color: #e67e22;
-            transform: translateY(-3px);
-        }
+    button:hover {
+      background: linear-gradient(to right, #f9e076, #ffe699, #f9e076);
+      transform: translateY(-3px);
+    }
 
-        .extra-options {
-            margin-top: 20px;
-            font-size: 14px;
-        }
+    .extra-options {
+      margin-top: 20px;
+      font-size: 14px;
+    }
 
-        .extra-options a {
-            text-decoration: none;
-            color: #F39C12;
-            margin-right: 15px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
+    .extra-options a {
+      text-decoration: none;
+      color: #ffda6b;
+      margin-right: 15px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
 
-        .extra-options a:hover {
-            text-decoration: underline;
-            color: #fff;
-        }
+    .extra-options a:hover {
+      text-decoration: underline;
+      color: #fff2c2;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-    </style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <h2>RIOCHEATS V1</h2>
-        <p>Enter the 4-digit number displayed below</p>
-        <p>Your 4-digit number: <strong id="random-number"></strong></p>
+  <div class="login-container">
+    <h2>RIOCHEATS V1</h2>
+    <p>Enter the 4-digit number displayed below</p>
+    <p>Your 4-digit number: <strong id="random-number"></strong></p>
 
-        <form id="login-form">
-            <div class="input-group">
-                <label for="digit-input">Enter Number</label>
-                <input type="text" id="digit-input" maxlength="4" placeholder="Enter 4-digit number" required>
-            </div>
-            <div class="input-group">
-                <button type="submit">Login</button>
-            </div>
-        </form>
+    <form id="login-form">
+      <div class="input-group">
+        <label for="digit-input">Enter Number</label>
+        <input type="text" id="digit-input" maxlength="4" placeholder="Enter 4-digit number" required>
+      </div>
+      <div class="input-group">
+        <button type="submit">Login</button>
+      </div>
+    </form>
 
-        <div class="extra-options">
-            <a href="#">Forgot Number?</a>
-            <a href="#">Sign Up</a>
-        </div>
+    <div class="extra-options">
+      <a href="#">Forgot Number?</a>
+      <a href="#">Sign Up</a>
     </div>
+  </div>
 
-    வந்து ஊம்புடா புண்ட 😂🤣😂😂
-    படிப்பறிவு இல்லாத தற்குறி தேவிடியா 🤣😂🤣😂
-இவரு பெரிய தேவிடியா கிராக்கர் 🤣😂
+  <script>
+    function generateRandomNumber() {
+      const randomNum = Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('random-number').textContent = randomNum;
+      sessionStorage.setItem('correctNumber', randomNum);
+    }
+
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const enteredNumber = document.getElementById('digit-input').value;
+      const correctNumber = sessionStorage.getItem('correctNumber');
+
+      if (enteredNumber == correctNumber) {
+        window.location.href = "https://riomandd.github.io/Extrapageadderrionew/";
+      } else {
+        alert("Incorrect number. Please try again.");
+      }
+    });
+
+    window.onload = generateRandomNumber;
+  </script>
+
+</body>
+</html>
